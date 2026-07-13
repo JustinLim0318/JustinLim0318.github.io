@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justin Lim Boon Keat — Senior Android Developer</title>
+<style>
+  :root {
+    --navy: #1F3864;
+    --accent: #2E86AB;
+    --accent-light: #EAF4F8;
+    --grey: #555;
+    --text: #222;
+    --border: #e2e8ef;
+    --bg: #fafbfc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header.hero {
+    background: linear-gradient(135deg, var(--navy), var(--accent));
+    color: #fff;
+    text-align: center;
+    padding: 56px 20px 40px;
+  }
+  header.hero h1 {
+    margin: 0 0 6px;
+    font-size: 2.2rem;
+    letter-spacing: 0.5px;
+  }
+  header.hero .title {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 20px;
+  }
+  header.hero .contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    font-size: 0.95rem;
+  }
+  header.hero .contact a, header.hero .contact span { color: #fff; opacity: 0.95; }
+  header.hero .contact a:hover { opacity: 1; text-decoration: underline; }
+
+  nav.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  nav.sticky a {
+    color: var(--navy);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+  nav.sticky a:hover { background: var(--accent-light); text-decoration: none; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  section { margin-bottom: 48px; scroll-margin-top: 60px; }
+  section h2 {
+    font-size: 1.15rem;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  section h2::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+
+  .summary { font-size: 1rem; color: #333; }
+
+  .role {
+    position: relative;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent);
+    margin-bottom: 22px;
+  }
+  .role summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-weight: 600;
+    color: #111;
+    padding: 2px 0;
+  }
+  .role summary::-webkit-details-marker { display: none; }
+  .role summary .co { font-weight: 400; }
+  .role summary .dates { font-style: italic; color: var(--grey); font-size: 0.85rem; font-weight: 400; }
+  .role summary::after {
+    content: "▸";
+    color: var(--accent);
+    margin-left: 8px;
+    transition: transform 0.15s ease;
+  }
+  .role[open] summary::after { transform: rotate(90deg); }
+  .role ul { margin: 10px 0 4px; padding-left: 20px; }
+  .role li { margin-bottom: 6px; font-size: 0.95rem; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    background: #fff;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .card h3 { margin: 0 0 6px; font-size: 1rem; color: var(--navy); }
+  .card p { margin: 0 0 8px; font-size: 0.88rem; color: #444; }
+  .card a { font-size: 0.85rem; font-weight: 600; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    background: var(--accent-light);
+    color: var(--navy);
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .skill-group { margin-bottom: 14px; }
+  .skill-group .label { font-weight: 600; font-size: 0.85rem; color: var(--grey); margin-bottom: 6px; display: block; }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px 50px;
+    color: var(--grey);
+    font-size: 0.85rem;
+  }
+
+  .print-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 18px;
+    background: #fff;
+    color: var(--navy);
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .print-btn:hover { text-decoration: none; opacity: 0.9; }
+
+  @media print {
+    nav.sticky, .print-btn { display: none; }
+    .role { break-inside: avoid; }
+    .role[open] summary::after { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    header.hero h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Justin Lim Boon Keat</h1>
+  <div class="title">Senior Android Developer</div>
+  <div class="contact">
+    <a href="tel:+60177081231">☎ +6017-708 1231</a>
+    <a href="mailto:justinlim0318@gmail.com">✉ justinlim0318@gmail.com</a>
+    <a href="https://www.linkedin.com/in/justin-lim-a434a6109" target="_blank" rel="noopener">🔗 linkedin.com/in/justin-lim-a434a6109</a>
+  </div>
+  <a href="#" class="print-btn" onclick="window.print(); return false;">⭳ Download / Print PDF</a>
+</header>
+
+<nav class="sticky">
+  <a href="#summary">Summary</a>
+  <a href="#experience">Experience</a>
+  <a href="#freelance">Freelance</a>
+  <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+</nav>
+
+<main>
+
+  <section id="summary">
+    <h2>Professional Summary</h2>
+    <p class="summary">Senior Android Developer with 10+ years of experience building and scaling consumer-facing mobile applications across fintech, crypto, and social platforms. Currently at Crypto.com, developing and maintaining a top-tier crypto trading app used by millions, with hands-on experience migrating native codebases to React Native, building shared design systems, and delivering features with Kotlin, Jetpack Compose, and MVVM. Previously led a 5-6 person Android team through an MVP-to-MVVM architecture overhaul. Strong track record across the full lifecycle — architecture, development, CI/CD, and cross-functional delivery.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+
+    <details class="role" open>
+      <summary><span><strong>Senior Android Developer</strong> <span class="co">— Crypto.com</span></span><span class="dates">Mar 2022 – Present</span></summary>
+      <ul>
+        <li>Develop, design, and test features for Crypto.com's flagship app, "Crypto.com: Buy BTC, ETH & CRO", which has millions of downloads and a high Play Store rating.</li>
+        <li>Led migration of native modules to React Native across both brownfield (existing app) and greenfield (new app) projects, enabling faster cross-platform iteration.</li>
+        <li>Contributed to a shared design system library consumed by both Android and iOS teams, improving UI consistency and development speed.</li>
+        <li>Built and maintained CI/CD pipelines using GitHub Actions to automate build, test, and release workflows.</li>
+        <li>Built features using Jetpack Compose, Kotlin Coroutines/Flow, MVVM, Navigation, and Koin, backed by unit tests.</li>
+        <li>Contributed to a second React Native application, OG.com (a prediction markets app), alongside the core team.</li>
+        <li>Participated in code reviews and contributed to performance and stability improvements, helping maintain a high-quality, high-rated app at scale.</li>
+        <li>Practiced agentic engineering using AI coding agents (Cursor, Claude Code) for day-to-day development, refactoring, and code review.</li>
+        <li>Built custom agent workflows, skills, and tooling spanning brainstorming, planning, development, validation, and release.</li>
+        <li>Involved in product refinement sessions, contributing engineering input on feasibility and scope.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Android Team Lead</strong> <span class="co">— Yippi</span></span><span class="dates">Aug 2020 – Nov 2021</span></summary>
+      <ul>
+        <li>Managed and mentored a team of 5-6 Android developers, overseeing task allocation, code quality, and delivery timelines.</li>
+        <li>Architected and led the team through a full revamp from MVP to MVVM architecture.</li>
+        <li>Integrated a third-party Mini Program platform into the Yippi app, expanding in-app functionality.</li>
+        <li>Set up CI/CD and release/deployment workflows for the Android team, streamlining build and release processes.</li>
+        <li>Owned resourcing and technical planning across the Android workstream.</li>
+        <li>Took part in requirements gathering and product refinement sessions, working closely with product to shape feature scope.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Senior Android Developer</strong> <span class="co">— Touch 'n Go Digital (eWallet)</span></span><span class="dates">Jan 2020 – Jul 2020</span></summary>
+      <ul>
+        <li>Led Mini Program projects and drove a revamp of the app's codebase for improved maintainability.</li>
+        <li>Set up SonarQube, Jenkins, and JFrog to establish code quality and CI/CD infrastructure for the Android team.</li>
+        <li>Delivered new features end-to-end, from requirements gathering through solution design, documentation, and unit testing to deployment.</li>
+        <li>Wrote PRDs (Product Requirement Documents) to define feature scope and align engineering with product stakeholders.</li>
+        <li>Took part in product refinement sessions, providing engineering input on feasibility and scope.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Senior Android Developer</strong> <span class="co">— Yippi</span></span><span class="dates">Nov 2018 – Dec 2019</span></summary>
+      <ul>
+        <li>Built third-party integrations, live streaming, and mini-video features using Aliyun services.</li>
+        <li>Developed the Social Engine and Yippi Wallet features.</li>
+        <li>Served as Scrum Master, running sprint ceremonies and coordinating delivery across the team.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Android Application Developer (Part-time)</strong> <span class="co">— Carousell</span></span><span class="dates">May 2018 – Oct 2018</span></summary>
+      <ul>
+        <li>Built and shipped marketplace features for the Carousell Android app.</li>
+        <li>Implemented new features using Protocol Buffers for efficient client-server communication.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Junior Android Developer</strong> <span class="co">— Gobike Asia</span></span><span class="dates">Oct 2016 – Oct 2018</span></summary>
+      <ul>
+        <li>Designed and implemented the app's MVP architecture using RxJava and Dagger2.</li>
+        <li>Contributed to a React Native module and maintained overall code quality through unit testing and Android Architecture Components.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Android Application Developer</strong> <span class="co">— Studio 212 Sdn Bhd</span></span><span class="dates">Feb 2015 – Oct 2016</span></summary>
+      <ul>
+        <li>Designed and developed Android applications end-to-end, including API integration, debugging, and testing.</li>
+      </ul>
+    </details>
+
+    <details class="role">
+      <summary><span><strong>Tester &amp; Programmer, KWSP System</strong> <span class="co">— Silverlake Axis Sdn Bhd</span></span><span class="dates">Oct 2013 – Jan 2014</span></summary>
+      <ul>
+        <li>Performed user acceptance testing on the EPF (Employees Provident Fund) system and debugged issues identified during testing.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="freelance">
+    <h2>Freelance Projects</h2>
+    <p class="summary">Independent Android/Flutter development for freelance clients, delivered end-to-end from requirements gathering through deployment.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>PIXX – Beauty Review &amp; Redeem</h3>
+        <p>Flutter app using BLoC, Hive, and GraphQL.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.internutsbn.pixx" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>Loomi – Short Drama</h3>
+        <p>Flutter short-form video streaming app using BLoC, Hive, and GraphQL.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.loomi.asia" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>OPX – Mobile Remittance</h3>
+        <p>Native Android app for cross-border money transfers.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.onepip.opx" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>EBooster</h3>
+        <p>Native Android medication-reminder app with music playback, integrated with Proton's in-car Android Auto/CarPlay service.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Selected Projects</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Crypto.com – Buy BTC, ETH &amp; CRO</h3>
+        <a href="https://play.google.com/store/apps/details?id=co.mona.android" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>OG.com – Prediction Markets</h3>
+        <a href="https://play.google.com/store/apps/details?id=com.og.app.android" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>Touch 'n Go eWallet</h3>
+        <a href="https://play.google.com/store/apps/details?id=my.com.tngdigital.ewallet" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+      <div class="card">
+        <h3>Carousell</h3>
+        <a href="https://play.google.com/store/apps/details?id=com.thecarousell.Carousell" target="_blank" rel="noopener">View on Play Store →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill-group">
+      <span class="label">Languages &amp; Frameworks</span>
+      <div class="tags">
+        <span class="tag">Kotlin</span><span class="tag">Java</span><span class="tag">Flutter</span><span class="tag">BLoC</span><span class="tag">Hive</span><span class="tag">GraphQL</span><span class="tag">React Native</span><span class="tag">Jetpack Compose</span><span class="tag">Coroutines/Flow</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="label">Architecture</span>
+      <div class="tags">
+        <span class="tag">MVVM (Hilt, Koin)</span><span class="tag">MVP (RxJava, Dagger2)</span><span class="tag">Android Jetpack</span><span class="tag">Navigation</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="label">Platforms &amp; Infra</span>
+      <div class="tags">
+        <span class="tag">Firebase</span><span class="tag">GitHub Actions</span><span class="tag">Jenkins</span><span class="tag">SonarQube</span><span class="tag">JFrog</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="label">Tools</span>
+      <div class="tags">
+        <span class="tag">Figma</span><span class="tag">Zeplin</span><span class="tag">Jira</span><span class="tag">Slack</span><span class="tag">LaunchDarkly</span><span class="tag">Lokalise</span><span class="tag">GitHub</span><span class="tag">Bitbucket</span><span class="tag">Sourcetree</span><span class="tag">Cursor</span><span class="tag">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <p><strong>Bachelor of Science (Hons), Software Engineering</strong> — Universiti Tunku Abdul Rahman<br>
+    <span style="color:var(--grey); font-style:italic;">January 2012 – January 2015</span></p>
+
+    <h2 style="margin-top:32px;">Languages</h2>
+    <p>English (Fluent) · Mandarin (Fluent) · Bahasa Melayu (Conversational)</p>
+  </section>
+
+</main>
+
+<footer>
+  References available upon request.
+</footer>
+
+</body>
+</html>
